@@ -1,0 +1,210 @@
+
+@media (prefers-reduced-motion: no-preference) {
+  .main_content .hammer-animation {
+    animation: hammer-animation 0.7s linear;
+    animation-fill-mode: forwards;
+    animation-delay: 1.5s;
+  }
+
+  .main_content .trigger-animation {
+    animation: trigger-animation 1s linear;
+    animation-fill-mode: forwards;
+    animation-delay: 1.5s;
+  }
+
+  .main_content .clip-animation {
+    animation: clip-animation 2s ease;
+    animation-fill-mode: forwards;
+  }
+/* 
+  .timeCounter-animation {
+    animation: timeCounter 3s ease;
+    animation-fill-mode: forwards;
+  } */
+
+  /* .main_content-animation {
+    animation: main-animation 3s ease;
+    animation-fill-mode: forwards;
+  } */
+}
+
+.App-header {
+  background-color: #2c3137;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hammer-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  80% {
+    transform: rotate(40deg);
+  }
+
+  100% {
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes trigger-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  70% {
+    transform: rotate(-40deg);
+  }
+
+  81% {
+    transform: rotate(-60deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes clip-animation {
+  0% {
+    transform: translateY(-150vh);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+/* 
+@keyframes timeCounter {
+  0% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+} */
+/* 
+@keyframes main-animation {
+  0% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+} */
+
+.main_content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.main_content .gun {
+  z-index: 1;
+  width: 700px;
+}
+
+.main_content .hammer {
+  position: absolute;
+  transform: rotate(-15deg);
+  right: 23%;
+  top: 8%;
+  z-index: 0;
+  width: 100px;
+}
+
+.main_content .trigger {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  width: 80px;
+}
+
+.main_content .clip {
+  position: absolute;
+  height: 150vh;
+  background-image: url(./clip.png);
+  width: 116px;
+  background-size: 100%;
+  background-repeat: repeat-y;
+}
+
+.main_content .clip-content {
+  position: absolute;
+  top: 8.5%;
+  right: 41%;
+  width: 116px;
+  height: 96px;
+  overflow: hidden;
+}
+
+.timeCounter {
+  position: absolute;
+  font-size: 300px;
+  font-weight: bold;
+  opacity: 0;
+}
+
+.resetButton {
+  position: fixed;
+  bottom: 160px;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: yellowgreen;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 750px) {
+  .main_content .gun {
+    width: 350px;
+  }
+
+  .main_content .hammer {
+    width: 50px;
+  }
+
+  .main_content .trigger {
+    width: 40px;
+  }
+
+  .main_content .clip {
+    width: 58px;
+  }
+
+  .main_content .clip-content {
+    width: 58px;
+    height: 48px;
+  }
+
+  .timeCounter {
+    font-size: 150px;
+  }
+}

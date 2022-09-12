@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  font-family: "Montserrat" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Montserrat";
+}
+
+.level-bar .bar .bar-segment .bottom {
+  height: 5px;
+}
+
+.bar-segment {
+  display: flex;
+  flex-direction: column;
+  transform: skew(-45deg);
+  transform-origin: bottom left;
+  height: 100%;
+}
+
+.bar-segment.filled .fill {
+  background-color: #f8bf60;
+}
+
+.bar-segment .fill {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 1px solid #f8bf60;
+}
+
+.bar-segment.filled .bottom {
+  background-color: #725e3c;
+}
+
+.bar-segment .bottom {
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  border: 1px solid #725e3c;
+}
+
+.bar-segment.rounded {
+  transform: none;
+}
+
+.bar-segment.rounded .fill {
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.bar-segment.rounded .bottom {
+  height: 50%;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  transform: translateY(-50%);
+  border-top: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #2c2b2b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #16151a;
+  border-radius: 100vh;
+  border: 3px solid #16151a;
+}
+
+.bg-yellow {
+  background: #f8bf60;
+}
+
+.bg-yellow-shadow {
+  background: #997a49;
+}
+
+.bg-purple {
+  background: #8d52c6;
+}
+
+.bg-blue {
+  background: #2995bd;
+}
+
+.bg-green {
+  background: #298854;
+}
+
+.bg-dark {
+  background: #2c3137;
+}
+
+.bg-black {
+  background: #171c22;
+}
+
+.bg-red {
+  background: #cd5334;
+}
+
+.bg-pink {
+  background: #f8a9b5;
+}
+
+.bg-white {
+  background: #ffffff;
+}
+
+.bg-white-shadow {
+  background: #a0a2a5;
+}
+
+.text-yellow {
+  color: #f8bf60;
+}
+
+.text-yellow-shadow {
+  color: #997a49;
+}
+
+.text-purple {
+  color: #8d52c6;
+}
+
+.text-blue {
+  color: #2995bd;
+}
+
+.text-green {
+  color: #298854;
+}
+
+.text-dark {
+  color: #2c3137;
+}
+
+.text-black {
+  color: #000000;
+}
+
+.text-red {
+  color: #cd5334;
+}
+
+.text-pink {
+  color: #f8a9b5;
+}
+
+.text-black {
+  color: #171c22;
+}
