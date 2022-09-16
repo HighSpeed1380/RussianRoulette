@@ -23,4 +23,13 @@ router.post(
   }
 );
 
+// router.all("/", (req, res, next) => {
+//   // res.json({ message: "return form user router" });
+//   next();
+// });
+
+// router.post("/", (req, res) => {
+//   res.json(req.body);
+// });
+
 module.exports = router;

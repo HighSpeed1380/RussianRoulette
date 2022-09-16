@@ -1,16 +1,27 @@
-require("dotenv");
+require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/db");
 const bodyParser = require("body-parser");
 const path = require("path");
-
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const app = express();
+
+//API security
+app.use(helmet());
+
+//handle cors error
+app.use(cors());
+
+//Logger
+app.use(morgan("tiny"));
 
 // Connect Database
 connectDB();
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
 app.use(bodyParser.json());
@@ -49,6 +60,12 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+// app.use("*", (req, res, next) => {
+//   const error = new Error("Resource not found");
+//   error.status = 404;
+//   next(error);
+// });
 
 const PORT = process.env.PORT || 5000;
 

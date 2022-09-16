@@ -1,12 +1,18 @@
-const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURI');
+require("dotenv").config();
+const mongoose = require("mongoose");
+// const config = require('config');
+// const db = config.get("mongoURI");
 
 const connectDB = async () => {
   try {
-    mongoose.connect(process.env.MONGODB_URI || db, { useUnifiedTopology: true });
+    await mongoose.connect(process.env.MONGO_URI || db, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Connected...");
+
     const connection = mongoose.connection;
-    connection.once('open', () => {
+    connection.on("open", () => {
       console.log("MongoDB database connection established successfully");
     });
   } catch (err) {
