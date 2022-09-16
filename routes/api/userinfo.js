@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { check } = require("express-validator");
+
 const userInfoController = require("../../controllers/userInfoController");
+const { hashPassword } = require("../../helper/bcrypt.helper");
 
 //for example practise
 router.all("/", (req, res, next) => {
@@ -9,8 +11,24 @@ router.all("/", (req, res, next) => {
 });
 
 router.post("/", async (req, res) => {
+  const { username, email, password, role, level, balance, generatedAddress } =
+    req.body;
   try {
-    const result = await userInfoController.insertUser(req.body);
+    //hash password
+    const hashedPass = await hashPassword(password);
+
+    const newUserObj = {
+      username,
+      email,
+      password: hashedPass,
+      role,
+      level,
+      balance,
+      generatedAddress,
+    };
+
+    //insert userinformation
+    const result = await userInfoController.insertUser(newUserObj);
     console.log(result);
     res.json({ message: "New user created", result });
   } catch (error) {
@@ -31,12 +49,16 @@ router.post(
   }
 );
 
+// signin
 router.post(
   "/signin",
-  check("username", "Username is required").exists(),
-  check("password", "Password is required").exists(),
+  // check("username", "Username is required").exists(),
+  // check("password", "Password is required").exists(),
+  // (req, res) => {
+  //   userInfoController.signin(req, res);
+  // }
   (req, res) => {
-    userInfoController.signin(req, res);
+    res.json({ status: "success", message: "Success signin" });
   }
 );
 

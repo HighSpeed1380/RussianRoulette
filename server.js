@@ -9,7 +9,7 @@ const morgan = require("morgan");
 const app = express();
 
 //API security
-app.use(helmet());
+// app.use(helmet());
 
 //handle cors error
 app.use(cors());

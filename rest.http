@@ -1,0 +1,22 @@
+### User signup endpoint
+Post http://localhost:5000/api/userinfo/
+Content-Type: application/json
+
+{
+    "username": "123456",
+    "email": "12345667",
+    "password": "123",
+    "role": "123456",
+    "level": 1,
+    "balance": 1,
+    "generatedAddress": "1"
+}
+
+### User signin endpoint
+Post http://localhost:5000/api/userinfo/signin/
+Content-Type: application/json
+
+{
+    "username": "alex",
+    "password": "workd"
+}
