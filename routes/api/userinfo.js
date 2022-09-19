@@ -57,8 +57,20 @@ router.post(
   // (req, res) => {
   //   userInfoController.signin(req, res);
   // }
-  (req, res) => {
-    res.json({ status: "success", message: "Success signin" });
+
+  async (req, res) => {
+    const { username, password } = req.body;
+    console.log(req.body);
+
+    //get user with username from db
+    //hash username and compaire with db one
+
+    if (!username || !password) {
+      return res.json({ status: "error", message: "Invalid form submition" });
+    }
+    const user = await userInfoController.getUserByUsername(username);
+    console.log(user);
+    res.json({ status: "success", message: "Login Successfully!" });
   }
 );
 

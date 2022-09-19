@@ -15,6 +15,23 @@ exports.insertUser = (userObj) => {
   });
 };
 
+//for example getUserByUsername
+exports.getUserByUsername = (username) => {
+  return new Promise((resolve, reject) => {
+    if (!username) return false;
+    try {
+      UserInfo.findOne({ username }, (error, data) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(data);
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 //  Sign up
 exports.signup = async (req, res) => {
   const errors = validationResult(req);

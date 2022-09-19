@@ -17,6 +17,6 @@ Post http://localhost:5000/api/userinfo/signin/
 Content-Type: application/json
 
 {
-    "username": "alex",
+    "username": "Jacky",
     "password": "workd"
 }
