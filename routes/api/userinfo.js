@@ -3,7 +3,7 @@ const router = express.Router();
 const { check } = require("express-validator");
 
 const userInfoController = require("../../controllers/userInfoController");
-const { hashPassword } = require("../../helper/bcrypt.helper");
+const { hashPassword, comparePassword } = require("../../helper/bcrypt.helper");
 
 //for example practise
 router.all("/", (req, res, next) => {
@@ -62,14 +62,17 @@ router.post(
     const { username, password } = req.body;
     console.log(req.body);
 
-    //get user with username from db
-    //hash username and compaire with db one
-
     if (!username || !password) {
       return res.json({ status: "error", message: "Invalid form submition" });
     }
+
     const user = await userInfoController.getUserByUsername(username);
-    console.log(user);
+
+    const passwordFromDb = user._id ? user.password : null;
+    console.log(passwordFromDb);
+    const result = await comparePassword(password, passwordFromDb);
+    console.log(result);
+
     res.json({ status: "success", message: "Login Successfully!" });
   }
 );

@@ -3,7 +3,7 @@ Post http://localhost:5000/api/userinfo/
 Content-Type: application/json
 
 {
-    "username": "123456",
+    "username": "QQQ",
     "email": "12345667",
     "password": "123",
     "role": "123456",
@@ -17,6 +17,6 @@ Post http://localhost:5000/api/userinfo/signin/
 Content-Type: application/json
 
 {
-    "username": "Jacky",
-    "password": "workd"
+    "username": "QQQ",
+    "password": "123"
 }
