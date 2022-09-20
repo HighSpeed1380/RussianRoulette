@@ -4,6 +4,10 @@ const { check } = require("express-validator");
 
 const userInfoController = require("../../controllers/userInfoController");
 const { hashPassword, comparePassword } = require("../../helper/bcrypt.helper");
+const {
+  createAccessJWT,
+  createRefreshJWT,
+} = require("../../helper/jwt.helper");
 
 //for example practise
 router.all("/", (req, res, next) => {
@@ -68,12 +72,33 @@ router.post(
 
     const user = await userInfoController.getUserByUsername(username);
 
-    const passwordFromDb = user._id ? user.password : null;
-    console.log(passwordFromDb);
-    const result = await comparePassword(password, passwordFromDb);
-    console.log(result);
+    const passwordFromDb = user && user._id ? user.password : null;
 
-    res.json({ status: "success", message: "Login Successfully!" });
+    if (!passwordFromDb) {
+      return res.json({
+        status: "error",
+        message: "Invalid form username or password",
+      });
+    }
+
+    const result = await comparePassword(password, passwordFromDb);
+
+    if (!result) {
+      return res.json({
+        status: "error",
+        message: "Invalid form username or password",
+      });
+    }
+
+    const accessJWT = await createAccessJWT(user.username);
+    const refreshJWT = await createRefreshJWT(user.username);
+
+    res.json({
+      status: "success",
+      message: "Login Successfully!",
+      accessJWT,
+      refreshJWT,
+    });
   }
 );
 

@@ -3,9 +3,9 @@ Post http://localhost:5000/api/userinfo/
 Content-Type: application/json
 
 {
-    "username": "QQQ",
-    "email": "12345667",
-    "password": "123",
+    "username": "Albert",
+    "email": "rabconnection1380@gmail.com",
+    "password": "albert123",
     "role": "123456",
     "level": 1,
     "balance": 1,
@@ -17,6 +17,6 @@ Post http://localhost:5000/api/userinfo/signin/
 Content-Type: application/json
 
 {
-    "username": "QQQ",
-    "password": "123"
+    "username": "Albert",
+    "password": "albert123"
 }
