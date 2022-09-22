@@ -32,6 +32,23 @@ exports.getUserByUsername = (username) => {
   });
 };
 
+exports.storeUserRefreshJWT = (_id, token) => {
+  return new Promise((resolve, reject) => {
+    try {
+      UserInfo.findOneAndUpdate(
+        { _id },
+        { $set: { "refreshJWT.token": token, addedAt: Date.now() } },
+        { mew: true }
+      )
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+///////////////////////////////////////////////////////////
+
 //  Sign up
 exports.signup = async (req, res) => {
   const errors = validationResult(req);

@@ -8,38 +8,47 @@ const {
   createAccessJWT,
   createRefreshJWT,
 } = require("../../helper/jwt.helper");
+const {
+  userAuthorization,
+} = require("../../middlewares/authorization.middleware");
 
 //for example practise
-router.all("/", (req, res, next) => {
-  next();
-});
+// router.get("/", userAuthorization, (req, res) => {
+//   //this data coming form database
+//   const _id = req.userId;
+//   res.json({ user });
+// });
 
-router.post("/", async (req, res) => {
-  const { username, email, password, role, level, balance, generatedAddress } =
-    req.body;
-  try {
-    //hash password
-    const hashedPass = await hashPassword(password);
+// router.all("/", (req, res, next) => {
+//   next();
+// });
 
-    const newUserObj = {
-      username,
-      email,
-      password: hashedPass,
-      role,
-      level,
-      balance,
-      generatedAddress,
-    };
+// router.post("/", async (req, res) => {
+//   const { username, email, password, role, level, balance, generatedAddress } =
+//     req.body;
+//   try {
+//     //hash password
+//     const hashedPass = await hashPassword(password);
 
-    //insert userinformation
-    const result = await userInfoController.insertUser(newUserObj);
-    console.log(result);
-    res.json({ message: "New user created", result });
-  } catch (error) {
-    console.log(error);
-    res.json({ statux: "error", message: error.message });
-  }
-});
+//     const newUserObj = {
+//       username,
+//       email,
+//       password: hashedPass,
+//       role,
+//       level,
+//       balance,
+//       generatedAddress,
+//     };
+
+//     //insert userinformation
+//     const result = await userInfoController.insertUser(newUserObj);
+//     console.log(result);
+//     res.json({ message: "New user created", result });
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ statux: "error", message: error.message });
+//   }
+// });
 
 router.post(
   "/signup",
@@ -56,50 +65,50 @@ router.post(
 // signin
 router.post(
   "/signin",
-  // check("username", "Username is required").exists(),
-  // check("password", "Password is required").exists(),
-  // (req, res) => {
-  //   userInfoController.signin(req, res);
-  // }
-
-  async (req, res) => {
-    const { username, password } = req.body;
-    console.log(req.body);
-
-    if (!username || !password) {
-      return res.json({ status: "error", message: "Invalid form submition" });
-    }
-
-    const user = await userInfoController.getUserByUsername(username);
-
-    const passwordFromDb = user && user._id ? user.password : null;
-
-    if (!passwordFromDb) {
-      return res.json({
-        status: "error",
-        message: "Invalid form username or password",
-      });
-    }
-
-    const result = await comparePassword(password, passwordFromDb);
-
-    if (!result) {
-      return res.json({
-        status: "error",
-        message: "Invalid form username or password",
-      });
-    }
-
-    const accessJWT = await createAccessJWT(user.username);
-    const refreshJWT = await createRefreshJWT(user.username);
-
-    res.json({
-      status: "success",
-      message: "Login Successfully!",
-      accessJWT,
-      refreshJWT,
-    });
+  check("username", "Username is required").exists(),
+  check("password", "Password is required").exists(),
+  (req, res) => {
+    userInfoController.signin(req, res);
   }
+
+  // async (req, res) => {
+  //   const { username, password } = req.body;
+
+  //   if (!username || !password) {
+  //     return res.json({ status: "error", message: "Invalid form submition" });
+  //   }
+
+  //   const user = await userInfoController.getUserByUsername(username);
+
+  //   const passwordFromDb = user && user._id ? user.password : null;
+
+  //   if (!passwordFromDb) {
+  //     return res.json({
+  //       status: "error",
+  //       message: "Invalid form username or password",
+  //     });
+  //   }
+
+  //   const result = await comparePassword(password, passwordFromDb);
+
+  //   if (!result) {
+  //     return res.json({
+  //       status: "error",
+  //       message: "Invalid form username or password",
+  //     });
+  //   }
+  //   // console.log(user._id);
+  //   const accessJWT = await createAccessJWT(user.username, `${user._id}`);
+  //   console.log(accessJWT);
+  //   const refreshJWT = await createRefreshJWT(user.username, `${user._id}`);
+
+  //   res.json({
+  //     status: "success",
+  //     message: "Login Successfully!",
+  //     accessJWT,
+  //     refreshJWT,
+  //   });
+  // }
 );
 
 router.put("/updateUserInfoById/:_id", (req, res) => {

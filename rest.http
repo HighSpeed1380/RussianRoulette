@@ -20,3 +20,7 @@ Content-Type: application/json
     "username": "Albert",
     "password": "albert123"
 }
+
+### Get a user profile endpoint
+GET http://localhost:5000/api/userinfo
+Authorization: 

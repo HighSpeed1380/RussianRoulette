@@ -34,6 +34,17 @@ const UserInfoSchema = new Schema(
     generatedAddress: {
       type: String,
     },
+    refreshJWT: {
+      token: {
+        type: String,
+        default: "",
+      },
+      addedAt: {
+        type: Date,
+        required: true,
+        default: Date.now(),
+      },
+    },
   },
   { timestamps: true }
 );
